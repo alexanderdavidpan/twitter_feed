@@ -17,6 +17,7 @@
 $(document).ready(function() {
   $('#screen-name-submit').click(function(e) {
     e.preventDefault();
+    $(this).prop("disabled", true);
     var screenName = $('#screen-name').val();
 
     $.ajax({
@@ -31,6 +32,8 @@ $(document).ready(function() {
       failure: function(resp) {
         console.log('FAIL');
       }
+    }).done(function() {
+      $('#screen-name-submit').prop("disabled", false);
     });
   });
 });
