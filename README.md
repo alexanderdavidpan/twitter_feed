@@ -46,3 +46,20 @@ $ rails s
 ```
 
 6. Open a browser and go to http://localhost:3000/ (assuming you did not specify a port option in step 4 and just used the default Rails port)
+
+
+## Testing
+
+To Run tests:
+
+1. Run db migrate for test environment:
+
+```
+rake db:migrate RAILS_ENV=test
+```
+
+2. Run tests:
+
+```
+rake test
+```
