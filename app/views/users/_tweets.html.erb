@@ -1,0 +1,9 @@
+<div id='tweets-list'>
+  <% if @tweets %>
+    <ol>
+      <% @tweets.each do |tweet| %>
+        <li><%= tweet.full_text %></li>
+      <% end %>
+    </ol>
+  <% end %>
+</div>

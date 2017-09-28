@@ -14,3 +14,23 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+$(document).ready(function() {
+  $('#screen-name-submit').click(function(e) {
+    e.preventDefault();
+    var screenName = $('#screen-name').val();
+
+    $.ajax({
+      type: 'GET',
+      url: '/users/tweets',
+      data: {
+        screen_name: screenName
+      },
+      success: function(resp) {
+        console.log(resp);
+      },
+      failure: function(resp) {
+        console.log('FAIL');
+      }
+    });
+  });
+});
