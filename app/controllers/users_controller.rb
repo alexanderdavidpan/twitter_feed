@@ -4,12 +4,11 @@ class UsersController < ApplicationController
 
   def tweets
     screen_name = user_params['screen_name']
-    @user = TWITTER_CLIENT.user(screen_name)
+    @user = User.find_or_create_by_screen_name(screen_name)
 
     if @user.nil?
       @tweets = []
     else
-      User.create(id: @user.id, name: @user.name, screen_name: @user.screen_name)
       @tweets = TWITTER_CLIENT.user_timeline(@user.id, count: 10)
     end
 

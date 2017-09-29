@@ -5,4 +5,17 @@ class User < ActiveRecord::Base
   has_many :tweets
 
   self.primary_key = "id"
+
+  def self.find_or_create_by_screen_name(screen_name)
+    user = find_by_screen_name(screen_name)
+    if user.nil?
+      twitter_user = TWITTER_CLIENT.user(screen_name)
+      if twitter_user
+        user = User.create(id: twitter_user.id, name: twitter_user.name, screen_name: twitter_user.screen_name)
+      else
+        user = nil
+      end
+    end
+    user
+  end
 end

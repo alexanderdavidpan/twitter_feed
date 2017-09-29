@@ -30,6 +30,9 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'twitter'
 
+# Use mocha for stubbing methods
+gem 'mocha', group: [:development, :test]
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

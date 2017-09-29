@@ -39,4 +39,23 @@ class UserTest < ActiveSupport::TestCase
     assert_equal ["has already been taken"], fourth_user.errors.messages[:screen_name]
     refute fourth_user.save
   end
+
+  test "find portion of find_or_create_by_screen_name method" do
+    new_user = User.new(id: 1, name: "Kobe Bryant", screen_name: "kobebryant")
+    assert new_user.valid?
+    assert new_user.save
+
+    TWITTER_CLIENT.expects(:user).never
+
+    stored_user = User.find_or_create_by_screen_name("kobebryant")
+    assert_equal new_user, stored_user
+  end
+
+  test "create portion of find_or_create_by_screen_name method" do
+    TWITTER_CLIENT.expects(:user)
+      .with("SHAQ")
+      .returns(User.new(id: 1, name: "SHAQ", screen_name: "SHAQ"))
+
+    User.find_or_create_by_screen_name("SHAQ")
+  end
 end
